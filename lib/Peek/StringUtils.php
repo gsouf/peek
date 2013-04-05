@@ -26,7 +26,9 @@ class StringUtils {
      * @param string $haystack the string to be cleaned
      * @return string the clean string
      */
-    public static function onlyAlphaNum($haystack){
+    public static function onlyAlphaNum($haystack,$removeSpaces=true){
+        if($removeSpaces)
+            $haystack=  str_replace (" ","",$haystack);
         return preg_replace("/[^A-Za-z0-9 ]/", '', $haystack);
     }
     
