@@ -16,9 +16,9 @@ class ValuesUtils {
      * if the given array has the given key, function will give the value at the given key, else it will return $defaultValue
      * @param type $array the array to check wether the key exists
      * @param type $key the key to check
-     * @param type $defaultValue the value to return if key is not set
+     * @param type $defaultValue the value to return if key is not set. Default to null
      */
-    public static function getArrayKeyIfIsset(&$array,$key,$defaultValue=null){
+    public static function getIfArrayKey(&$array,$key,$defaultValue=null){
         if(isset($array[$key]))
             return $array[$key];
         else
