@@ -15,7 +15,7 @@ class StringUtils {
      * @param string $subject the string in which we search
      * @return boolean true if $subject beguins with $search
      */
-    public static function beguinsWith($search,$subject){
+    public static function beginsWith($search,$subject){
         return 0 !== strncmp($subject,$search,  strlen($search)) ;
     }
     
