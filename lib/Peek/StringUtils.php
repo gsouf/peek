@@ -10,6 +10,18 @@ namespace Peek;
 class StringUtils {
     
     /**
+     * look if $subject begins with $search
+     * @param string $search the string that we want to find in $subject
+     * @param string $subject the string in which we search
+     * @return boolean true if $subject beguins with $search
+     */
+    public static function beguinsWith($search,$subject){
+        return 0 !== strncmp($subject,$search,  strlen($search)) ;
+    }
+    
+    // TODO ends with
+
+        /**
      * Will remove all extra (e.g. accents) from given string
      * @param string $haystack
      * @return string the cleaned string
