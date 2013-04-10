@@ -16,7 +16,7 @@ class StringUtils {
      * @return boolean true if $subject beguins with $search
      */
     public static function beginsWith($search,$subject){
-        return 0 !== strncmp($subject,$search,  strlen($search)) ;
+        return 0 === strncmp($subject,$search,  strlen($search)) ;
     }
     
     // TODO ends with
