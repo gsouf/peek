@@ -1,6 +1,6 @@
 <?php
 
-namespace Peek;
+namespace Peek\Utils;
 
 /**
  * Description of StringUtils

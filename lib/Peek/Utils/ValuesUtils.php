@@ -1,6 +1,6 @@
 <?php
 
-namespace Peek;
+namespace Peek\Utils;
 
 /**
  * Description of ValuesUtils
@@ -20,6 +20,29 @@ class ValuesUtils {
             return $array[$key];
         else
             return $defaultValue;
+    }
+    
+    /**
+     * Look wether $n is an integer or a string representation of an integer
+     * Here are some cases : 
+     * 
+     * $n=5     // true
+     * $n=5.0   // true
+     * $n="5"   // true
+     * $n="5.0" // true
+     * $n=-5    // true
+     * $n="-5"  // true
+     * $n=5.1   // false
+     * $n="5.1" // false
+     * 
+     * @param mixed $n the value to test as an integer
+     * @return boolean true if $n is an integer
+     */
+    public static function isInt($n){
+         if(!is_numeric($n))
+		return false;
+
+	return intval($n) == $n;
     }
     
 }
