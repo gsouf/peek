@@ -12,7 +12,8 @@
         }
     ],
     "require": {
-        "php": ">=5.3"
+        "php": ">=5.3",
+        "respect/validation": "dev-develop"
     },
     "autoload": {
         "psr-0" : {
