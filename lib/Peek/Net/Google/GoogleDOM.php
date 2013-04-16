@@ -18,12 +18,23 @@ class GoogleDOM extends \DOMDocument{
      */
     const NATURAL_LINKS_IN="descendant::h3[@class='r'][1]/a"; 
     
+    /**
+     * Get snipet into a natural node
+     */
+    const SNIPPET_IN="div[@class='vsc']/div[@class='s']"; 
+    
     protected $naturalsResults;
     protected $xpath;
+    
+    protected $search;
+    
+    protected $date;
 
-
-    public function __construct($version = null, $encoding = null) {
+    public function __construct($search,$version = null, $encoding = null) {
         parent::__construct($version, $encoding);
+        
+        $this->search = $search;
+        $this->date = time();
         
         $this->init();
     }
@@ -63,43 +74,49 @@ class GoogleDOM extends \DOMDocument{
     }
     
     /**
-     * search in the google results to find the given website
-     * @param $site the searched website.  It is recommended to only give the domain+tld (exemple : "google.com") without the "www" or protocole. 
-     * Obviously if you search for a subdomain specify it (e.g "translate.google.com")
-     * @return int|bool the position of the site into the page, or false if not found. Position begins to 1
+     * get the list of the natural results with position, url, title, snippet et matching website
+     * @return GooglePosition[] list of positions
      */
-    public function searchWebSite($site){
+    public function getPositions(){
         
-        $number=1;
-        
+        // list of naturals nodes
         $naturals=$this->getNaturals();
         
-
+        // prepare the query to find url+title into the natural nodes
+        $query=self::NATURAL_LINKS_IN;      
         
-        $query=self::NATURAL_LINKS_IN;
+        // prepare the query to find snippet into the natural nodes
+        $querysnippet=self::SNIPPET_IN;
         
+        $positions=array();// we buf results
+        $number=1;
         foreach($naturals as $node){
             
-            
-            
+            // query
             $aTag=$this->naturalsResults=$this->getXpath()->query($query,$node);
+            $snippet=$this->naturalsResults=$this->getXpath()->query($querysnippet,$node);
+            //take the first element, because anyway only one can be found
             $aTag=$aTag->item(0);
+            $snippet=$snippet->item(0);
             /* @var $aTag \DOMElement */
-            $title=$aTag->nodeValue;
-            $url=$aTag->getAttribute("href");
+            /* @var $snippet \DOMElement */
             
-            $resultsInfos=array();
+            $url=$aTag->getAttribute("href"); // get the link of the result
+            
             if(($protPos=strpos($url, "://"))>0){ //if no protocole it means the result is a an relative path to google. then it means than it is not a true natural result
-                $newUrl=  substr($url,$protPos+3);
-                $newUrl=  substr($newUrl,0,strpos($newUrl, "/"));
+                $title=$aTag->nodeValue; // get the title of the result
+                $shortUrl=  substr($url,$protPos+3); // ltrim the protocol
+                $shortUrl=  substr($shortUrl,0,strpos($shortUrl, "/")); // remove all what left after the first /   "google.com/search?..." becomes "google.com"
                 
-                $resultsInfos[]=["url"=>$url,"shorturl"=>$newUrl,"title"=>$title];
+                $positions[]=new GooglePosition($this->search, $shortUrl, $this->date, $number, $url, $title, $snippet->C14N());
+                
+                $number++;
             }
             
-            var_dump($resultsInfos);
+//            var_dump($resultsInfos);
         }
         
-        return $number;
+        return $positions;
     }
     
 }

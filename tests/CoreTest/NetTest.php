@@ -42,7 +42,7 @@ class NetTest  extends PHPUnit_Framework_TestCase{
         //var_dump($query->setProtocol("https")->setParam("aa", "bb")->setParam("pp","mm")->execute("google.fr"));
         
         $googleUrl=new Peek\Net\Google\GoogleUrl();
-        var_dump($googleUrl->setLang('fr')->search("bla bla")->searchWebSite("ll")."");
+        var_dump($googleUrl->setLang('fr')->search("bla bla")->getPositions()."");
         
     }
     
