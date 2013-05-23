@@ -9,17 +9,8 @@ namespace Peek\Utils;
  */
 class StringUtils {
     
-    /**
-     * look if $subject begins with $search
-     * @param string $search the string that we want to find in $subject
-     * @param string $subject the string in which we search
-     * @return boolean true if $subject beguins with $search
-     */
-    public static function beginsWith($search,$subject){
-        return 0 === strncmp($subject,$search,  strlen($search)) ;
-    }
-    
-    // TODO ends with
+    // FIRST PART OF THE CLASS IS MADE OF MODIFIER (functions which will modify a given string)
+    // SECOND PART OF THE CLASS IS MAGE OF CHECKER (functions which will check if a strings matches a given pattern)
 
         /**
      * Will remove all extra (e.g. accents) from given string
@@ -70,8 +61,11 @@ class StringUtils {
         return preg_replace("/[^A-Za-z0-9 ]/", '', $haystack);
     }
     
+    
+    
+    
     /**
-     * Peek1 is a format for search engine where all chars are only alphanumeric and lower chars. All accents are converted before alphnum filter applies
+     * Experimental Peek1 is a format for search engine where all chars are only alphanumeric and lower chars. All accents are converted before alphnum filter applies
      * @param type $newStr
      * @return type
      */
@@ -100,16 +94,57 @@ class StringUtils {
      *      you will do :  
      *          my_column LIKE "%.cd.%"
      *      Then you wont match with "acdc"
-     * 
+     * @deprecated 
      * @param type $newStr
      * @return type
      */
-    public static function toBPeek1($newStr){ 
+    private static function toBPeek1($newStr){ 
         
         // TODO : think more about this format
         
         return $newStr;
     }
+    
+    
+    
+    
+    
+    
+    
+    // HERE BEGINS THE SECOND PART
+    
+    /**
+     * look if $subject begins with $search
+     * @param string $search the string that we want to find in $subject
+     * @param string $subject the string in which we search
+     * @return boolean true if $subject beguins with $search
+     */
+    public static function beginsWith($search,$subject){
+        return 0 === strncmp($subject,$search,  strlen($search)) ;
+    }
+    
+    // TODO ends with
+    
+    /**
+     * test if the given string is a valid md5
+     * @param string $str string to test
+     * @return boolean true if the given str is md5 formated
+     */
+    public function isMd5($str){
+        // sha1 string is made of 32 alnum chars
+        return 32 === strlen($str) && ctype_alnum($str);
+    }
+    
+    /**
+     * test if the given string is a valid sha1
+     * @param string $str string to test
+     * @return boolean true if the given str is sha1 formated
+     */
+    public function isSha1($str){
+        // sha1 string is made of 40 hexadecimals chars
+        return 40 === strlen($str) && ctype_xdigit($str);
+    }
+    
     
 }
 
