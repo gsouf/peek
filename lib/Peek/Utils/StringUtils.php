@@ -145,6 +145,11 @@ class StringUtils {
         return 40 === strlen($str) && ctype_xdigit($str);
     }
     
+    public function isMongoId($str){
+        // Mongo id is made of 24 hexadecimals chars
+        return 24 === strlen($str) && ctype_xdigit($str);
+    }
+    
     
 }
 
