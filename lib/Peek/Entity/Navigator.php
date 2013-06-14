@@ -110,9 +110,7 @@ class Navigator {
     }
     
     public function isAllowed($path){
-        
-        return isset($this->map[$this->getLitteralPath($path)]);
-        
+        return key_exists($this->getLitteralPath($path),$this->map);
     }
     
     public function getLitteralPath($path){
