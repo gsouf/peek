@@ -39,7 +39,7 @@ class NetTest  extends PHPUnit_Framework_TestCase{
     public function testHttpQuery(){
         
         $query=new HttpQuery();
-        var_dump($query->setProtocol("https")->setParam("aa", "bb")->setParam("pp","mm")->execute("google.fr"));
+       // var_dump($query->setProtocol("https")->setParam("aa", "bb")->setParam("pp","mm")->execute("google.fr"));
         
 
         
