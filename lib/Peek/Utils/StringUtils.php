@@ -49,6 +49,16 @@ class StringUtils {
                     ),$haystack);
     }
     
+    
+    public static function subStringBefore($haystack,$needle,$n=1){
+        while($n>0){
+            $haystack=substr($haystack, 0, strrpos( $haystack, $needle));
+            $n--;
+        }
+        return $haystack;
+    }
+    
+    
     /**
      * remove all non-alphanumeric chars from the given string and return a clean string
      * @param string $haystack the string to be cleaned
