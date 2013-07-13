@@ -1,8 +1,9 @@
 {
-    "name": "peek/peek",
+    "name": "laemon/peek",
+    "version":"1.0.0",
     "type": "library",
-    "description": "Micro library for string manipulation",
-    "keywords": ["String"],
+    "description": "Library of tools for php",
+    "keywords": ["utils"],
     "homepage": "https://github.com/SneakyBobito/peek",
     "license": "BSD-3",
     "authors": [
