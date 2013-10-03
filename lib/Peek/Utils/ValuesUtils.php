@@ -14,18 +14,16 @@ class ValuesUtils {
      * @param type $array the array to check wether the key exists
      * @param type $key the key to check
      * @param type $defaultValue the value to return if key is not set. Default to null
+     * @deprecated moved to ArrayUtil
      */
     public static function getIfArrayKey(&$array,$key,$defaultValue=null){
-        if(isset($array[$key]))
-            return $array[$key];
-        else
-            return $defaultValue;
+        return ArrayUtils::getIfArrayKey($array, $key, $defaultValue);
     }
     
     /**
      * Look wether $n is an integer or a string representation of an integer
      * Here are some cases : 
-     * 
+     * <pre>
      * $n=5     // true
      * $n=5.0   // true
      * $n="5"   // true
@@ -34,7 +32,7 @@ class ValuesUtils {
      * $n="-5"  // true
      * $n=5.1   // false
      * $n="5.1" // false
-     * 
+     * </pre>
      * @param mixed $n the value to test as an integer
      * @return boolean true if $n is an integer
      */
