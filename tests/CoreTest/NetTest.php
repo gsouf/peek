@@ -19,8 +19,8 @@ class NetTest  extends PHPUnit_Framework_TestCase{
         $response = $curl->exec();
         $this->assertGreaterThan(0,strlen($response));
 
-        
-        
+
+
         /*******************/
         /* test curl mutli */
 
@@ -32,17 +32,17 @@ class NetTest  extends PHPUnit_Framework_TestCase{
 
         $this->assertGreaterThan(0,strlen($g->fetch()));
         $this->assertGreaterThan(0,strlen($y->fetch()));
-        
-        
+
+
     }
-    
+
     public function testHttpQuery(){
-        
+
         $query=new HttpQuery();
        // var_dump($query->setProtocol("https")->setParam("aa", "bb")->setParam("pp","mm")->execute("google.fr"));
-        
 
-        
+
+
     }
-    
+
 }
