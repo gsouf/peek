@@ -18,6 +18,10 @@ class Url {
     protected $port=80;
     
     
+    /**
+     * 
+     * @return \Peek\Net\Url
+     */
     public static function current(){
         $url = new Url();
         
@@ -28,10 +32,9 @@ class Url {
         
         $url->setPort($_SERVER["SERVER_PORT"]);
         
-        return url;
+        return $url;
         
     }
-    
     
     public function build(){
             return $this->protocol . "://" . $this->domain .  ($this->port != 80 ? ":" . $this->port : "" )  . $this->uri;
