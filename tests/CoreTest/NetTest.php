@@ -44,5 +44,17 @@ class NetTest  extends PHPUnit_Framework_TestCase{
 
 
     }
+    
+    public function testUrl(){
+        $url = new Peek\Net\Url();
+        
+        $url->setProtocol("https");
+        $url->setDomain("test.local.com");
+        $url->setUri("/testuri");
+        $this->assertEquals("https://test.local.com/testuri",$url->build());
+        $url->setPort(81);
+        $this->assertEquals("https://test.local.com:81/testuri",$url->build());
+        
+    }
 
 }
